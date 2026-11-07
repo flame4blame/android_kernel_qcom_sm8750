@@ -340,7 +340,6 @@ static int device_prepare(struct fpc1020_data *fpc1020, bool enable)
 		rc = vreg_setup(fpc1020, "fp_vdd_vreg", true);
 		if (rc)
 			goto exit;
-		pr_info("fpc %s rc=%d\n", __func__);
 
 		/*rc = vreg_setup(fpc1020, "vdd_io", true);
 		if (rc)
@@ -567,12 +566,12 @@ static ssize_t compatible_all_set(struct device *dev,
 	}else if(!strncmp(buf, "disable", strlen("disable")) && fpc1020->compatible_enabled != 0){
 		if (gpio_is_valid(fpc1020->irq_gpio))
 		{
-			devm_gpio_free(dev, fpc1020->irq_gpio);
+			gpio_free(fpc1020->irq_gpio);
 			pr_info("remove irq_gpio success\n");
 		}
 		if (gpio_is_valid(fpc1020->rst_gpio))
 		{
-			devm_gpio_free(dev, fpc1020->rst_gpio);
+			gpio_free(fpc1020->rst_gpio);
 			pr_info("remove rst_gpio success\n");
 		}
 		devm_free_irq(dev, gpio_to_irq(fpc1020->irq_gpio), fpc1020);

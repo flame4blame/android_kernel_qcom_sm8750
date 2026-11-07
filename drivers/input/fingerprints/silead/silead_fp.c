@@ -1526,7 +1526,7 @@ int silfp_dev_init(void)
         return status;
     }
     LOG_MSG_DEBUG(ERR_LOG, "silfp register_chrdev succsues");
-    silfp_class = class_create(THIS_MODULE, "silead_fp");
+    silfp_class = class_create("silead_fp");
     if (IS_ERR(silfp_class)) {
         unregister_chrdev(FP_DEV_MAJOR, silfp_driver.driver.name);
         return PTR_ERR(silfp_class);
