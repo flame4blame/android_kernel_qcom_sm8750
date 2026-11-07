@@ -442,7 +442,7 @@ static void mtdoops_do_dump(struct kmsg_dumper *dumper,
 	}
 
 	/* Only dump oopses if dump_oops is set */
-	if (reason == MTD_DUMP_OOPS && !dump_oops)
+	if (reason == KMSG_DUMP_OOPS && !dump_oops)
 		return;
 
 	kmsg_dump_rewind(&iter);
@@ -482,7 +482,7 @@ static void mtdoops_do_dump(struct kmsg_dumper *dumper,
 	}
 	else
 		printk(KERN_ERR "mtdoops: read pmsg failed sig = 0x%x \n", p_hdr->sig);
-	if (reason == MTD_DUMP_OOPS || reason == MTD_DUMP_PANIC) {
+	if (reason == KMSG_DUMP_OOPS || reason == KMSG_DUMP_PANIC) {
 		/* Panics must be written immediately */
 		mtdoops_write(cxt, 1);
 	} else {
