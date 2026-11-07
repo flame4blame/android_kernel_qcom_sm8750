@@ -186,7 +186,6 @@ static int block2mtd_write(struct mtd_info *mtd, loff_t to, size_t len,
 	mutex_unlock(&dev->write_mutex);
 	if (err > 0)
 		err = 0;
-	dev->mtd._sync(mtd);
 	return err;
 }
 
