@@ -141,12 +141,12 @@ struct xiaomi_touch *xiaomi_touch_dev_get(int minor)
         return NULL;
 }
 
-struct class *get_xiaomi_touch_class()
+struct class *get_xiaomi_touch_class(void)
 {
     return xiaomi_touch_dev.class;
 }
 
-struct device *get_xiaomi_touch_dev()
+struct device *get_xiaomi_touch_dev(void)
 {
     return xiaomi_touch_dev.dev;
 }
@@ -298,7 +298,7 @@ static int xiaomi_touch_probe(struct platform_device *pdev)
     }
 
     if (!xiaomi_touch_dev.class)
-        xiaomi_touch_dev.class = class_create(THIS_MODULE, "touch");
+        xiaomi_touch_dev.class = class_create("touch");
 
     if (!xiaomi_touch_dev.class) {
         pr_err("%s create device class err\n", __func__);
