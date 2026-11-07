@@ -1401,4 +1401,6 @@ config TOUCHSCREEN_HIMAX_HX83112B
 
 source "drivers/input/touchscreen/nt36528a_spi/Kconfig"
 
+source "drivers/input/touchscreen/ft8057m_spi/Kconfig"
+
 endif
