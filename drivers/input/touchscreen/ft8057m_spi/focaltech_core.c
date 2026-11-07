@@ -2097,13 +2097,11 @@ static int fts_parse_dt(struct device *dev, struct fts_ts_platform_data *pdata)
     }
 
     /* reset, irq gpio info */
-    pdata->reset_gpio = of_get_named_gpio_flags(np, "focaltech,reset-gpio",
-                                                0, &pdata->reset_gpio_flags);
+    pdata->reset_gpio = of_get_named_gpio(np, "focaltech,reset-gpio", 0);
     if (pdata->reset_gpio < 0)
         FTS_ERROR("Unable to get reset_gpio");
 
-    pdata->irq_gpio = of_get_named_gpio_flags(np, "focaltech,irq-gpio",
-                                              0, &pdata->irq_gpio_flags);
+    pdata->irq_gpio = of_get_named_gpio(np, "focaltech,irq-gpio", 0);
     if (pdata->irq_gpio < 0)
         FTS_ERROR("Unable to get irq_gpio");
 
@@ -2613,7 +2611,7 @@ static void fts_ts_register_for_panel_events(struct device_node *dp,
         return;
     }
 
-    FTS_INFO("registered for panel notifications panel: 0x%x\n", active_panel);
+    FTS_INFO("registered for panel notifications panel: %p\n", active_panel);
     ts_data->notifier_cookie = cookie;
 }
 
