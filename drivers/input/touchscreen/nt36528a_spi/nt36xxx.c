@@ -1337,10 +1337,10 @@ static int32_t nvt_parse_dt(struct device *dev)
     int32_t ret = 0;
 
 #if NVT_TOUCH_SUPPORT_HW_RST
-    ts->reset_gpio = of_get_named_gpio_flags(np, "novatek,reset-gpio", 0, &ts->reset_flags);
+    ts->reset_gpio = of_get_named_gpio(np, "novatek,reset-gpio", 0);
     NVT_LOG("novatek,reset-gpio=%d\n", ts->reset_gpio);
 #endif
-    ts->irq_gpio = of_get_named_gpio_flags(np, "novatek,irq-gpio", 0, &ts->irq_flags);
+    ts->irq_gpio = of_get_named_gpio(np, "novatek,irq-gpio", 0);
     NVT_LOG("novatek,irq-gpio=%d\n", ts->irq_gpio);
 
     ts->pen_support = of_property_read_bool(np, "novatek,pen-support");
@@ -2885,7 +2885,7 @@ Description:
 return:
     Executive outcomes. 0---succeed.
 *******************************************************/
-static int32_t nvt_ts_remove(struct spi_device *client)
+static void nvt_ts_remove(struct spi_device *client)
 {
     NVT_LOG("Removing driver...\n");
 
@@ -3000,8 +3000,6 @@ nvt_ts_esd_resume_probe = false;
         kfree(ts);
         ts = NULL;
     }
-
-    return 0;
 }
 
 static void nvt_ts_shutdown(struct spi_device *client)
